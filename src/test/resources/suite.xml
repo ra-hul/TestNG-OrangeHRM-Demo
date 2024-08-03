@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Orange HRM Demon">
+    <test name="admin login">
+        <groups>
+            <run>
+                <include name="smoke"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="testrunner.LoginTestRunner"></class>
+        </classes>
+    </test>
+
+    <test name="Crete new user">
+        <groups>
+            <run>
+                <include name="smoke"></include>
+            </run>
+        </groups>
+        <classes>
+            <class name="testrunner.PIMTestRunner"></class>
+        </classes>
+    </test>
+
+    <test name="user can login">
+
+        <classes>
+            <class name="testrunner.UserLoginTestRunner"></class>
+        </classes>
+    </test>
+
+</suite>

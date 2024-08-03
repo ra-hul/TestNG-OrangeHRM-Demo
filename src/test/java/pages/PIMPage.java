@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import setup.EmployeeModel;
 
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class PIMPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void createNewEmployee(String firstName, String lastName, String username,String password){
-        txtField.get(1).sendKeys(firstName);
-        txtField.get(3).sendKeys(lastName);
-        txtField.get(5).sendKeys(username);
-        txtField.get(6).sendKeys(password);
-        txtField.get(7).sendKeys(password);
+    public void createNewEmployee(EmployeeModel model){
+        txtField.get(1).sendKeys(model.getFirstName());
+        txtField.get(3).sendKeys(model.getLastName());
+        txtField.get(5).sendKeys(model.getUsername());
+        txtField.get(6).sendKeys(model.getPassword());
+        txtField.get(7).sendKeys(model.getPassword());
         button.get(1).click();
     }
 }

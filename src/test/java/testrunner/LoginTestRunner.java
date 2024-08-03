@@ -19,14 +19,15 @@ public class LoginTestRunner extends Setup {
         Assert.assertEquals(alertTextElem.getText(),"Invalid Credentials");
     }
 
-    @Test(priority = 2, description = "Admin can login with valid creds")
+    @Test(priority = 2, description = "Admin can login with valid creds", groups ="smoke")
     public void doLogin(){
         loginPage = new LoginPage(driver);
-        loginPage.doLogin("Admin", "admin123");
+//        loginPage.doLogin("Admin", "admin123");
+        loginPage.doLogin(System.getProperty("username"), System.getProperty("password"));
         Assert.assertTrue(loginPage.btnProfileImage.isDisplayed());
     }
 
-    @Test(priority = 3,description = "Admin can logout by clicking on logout button")
+    @Test(priority = 3,description = "Admin can logout by clicking on logout button", groups ="smoke")
     public void doLogout(){
         loginPage = new LoginPage(driver);
         loginPage.doLogout();

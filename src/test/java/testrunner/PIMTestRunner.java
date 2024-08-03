@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.PIMPage;
+import setup.EmployeeModel;
 import setup.Setup;
 import utils.Utils;
 
@@ -24,12 +25,12 @@ public class PIMTestRunner extends Setup {
     PIMPage pimPage;
 
     LoginPage loginPage;
-    @BeforeTest
+    @BeforeTest(groups = "smoke")
     public void doLogin(){
         loginPage = new LoginPage(driver);
         loginPage.doLogin("Admin", "admin123");
     }
-    @Test(priority = 1)
+    @Test(priority = 1, groups ="smoke")
     public void checkEmployeeList() throws InterruptedException {
         pimPage = new PIMPage(driver);
         pimPage.leftMenubar.get(1).click();
@@ -53,7 +54,16 @@ public class PIMTestRunner extends Setup {
         String lastName= faker.name().lastName();
         String username = faker.name().username();
         String password= "007Rahul@Paul!";
-        pimPage.createNewEmployee(firstName, lastName,username,password);
+
+
+        EmployeeModel model= new EmployeeModel();
+        model.setFirstName(firstName);
+        model.setLastName(lastName);
+        model.setUsername(username);
+        model.setPassword(password);
+
+
+        pimPage.createNewEmployee(model);
 
         WebElement headerTitleElm=driver.findElement(By.xpath("//h6[text()=\"Personal Details\"]"));
         System.out.println(headerTitleElm.getText());
@@ -64,7 +74,7 @@ public class PIMTestRunner extends Setup {
         String textTitle= headerTitleElm.getText();
         Assert.assertTrue(textTitle.contains("Personal Details"));
 
-        Utils.saveUser(firstName,lastName,username,password);
+        Utils.saveUser(model);
 
     }
 
